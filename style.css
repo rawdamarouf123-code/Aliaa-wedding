@@ -1,0 +1,70 @@
+*{box-sizing:border-box}
+:root{--pink:#ed8fb4;--bright-pink:#e978a5;--deep:#a95678;--ink:#684b57}
+html{scroll-behavior:smooth}
+body{margin:0;background:#fffafb;color:var(--ink);font-family:"Cairo",sans-serif;line-height:1.9;overflow-x:hidden}
+[hidden]{display:none!important}
+/* شاشة الرسالة */
+.welcome-screen{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 50% 20%,#fff 0,#fff4f8 52%,#f7dce7 100%);transition:opacity .8s,visibility .8s}
+.welcome-screen.hide{opacity:0;visibility:hidden;pointer-events:none}
+.welcome-card{width:min(100%,430px);padding:38px 25px 34px;text-align:center;background:#ffffffed;border:1px solid #efc2d3;border-radius:28px;box-shadow:0 18px 55px #c96d9230;position:relative}
+.welcome-card:before,.welcome-card:after{content:"♡";position:absolute;color:#ed9fba;font-size:23px;opacity:.7}
+.welcome-card:before{top:13px;right:18px}.welcome-card:after{bottom:13px;left:18px}
+.envelope{width:104px;height:76px;margin:0 auto 24px;position:relative;background:#f2b6cb;border-radius:7px;box-shadow:0 7px 15px #c96d9222;overflow:hidden}
+.envelope:before,.envelope:after{content:"";position:absolute;bottom:0;width:0;height:0;border-style:solid;z-index:2}
+.envelope:before{left:0;border-width:38px 52px 0 0;border-color:#e99bb7 transparent transparent}
+.envelope:after{right:0;border-width:38px 0 0 52px;border-color:#e99bb7 transparent transparent}
+.envelope-flap{position:absolute;top:0;left:0;width:0;height:0;border-left:52px solid transparent;border-right:52px solid transparent;border-top:43px solid #dc83a4;z-index:3}
+.envelope-letter{position:absolute;top:10px;left:35px;width:34px;height:48px;background:#fff9fb;color:#e978a5;font-size:24px;display:grid;place-items:center;border-radius:4px;z-index:1}
+.envelope-front{position:absolute;inset:auto 0 0;height:0;border-left:52px solid transparent;border-right:52px solid transparent;border-bottom:40px solid #f0aec4;z-index:4}
+.welcome-small,.eyebrow,.section-kicker{color:#bd6d8d;font-size:13px;margin:8px 0}
+.welcome-card h1,.welcome-card h2,h1,h2{font-family:"Amiri",serif;font-weight:700;color:#98546f}
+.welcome-card h1{font-size:29px;margin:4px 0}.welcome-card h2{font-size:46px;color:#d96593;margin:0}.welcome-card h2 span{font-size:26px}
+.welcome-text{font-size:14px;margin:8px 0 20px}
+.open-button,.submit-button{border:0;border-radius:30px;padding:12px 27px;background:#df79a0;color:white;font:600 15px "Cairo",sans-serif;cursor:pointer;box-shadow:0 6px 18px #d9659338;transition:.2s}
+.open-button:hover,.submit-button:hover{background:#c85e87;transform:translateY(-2px)}
+/* أزرار الصوت */
+.sound-controls{position:fixed;left:16px;top:42%;z-index:25;display:grid;gap:12px}
+.sound-button{width:48px;height:48px;border:1px solid #f2b6cb;border-radius:50%;background:#ed8fb4;color:white;font-size:25px;cursor:pointer;box-shadow:0 5px 16px #d9659340;transition:.2s}
+.sound-button:hover{transform:scale(1.08);background:#df79a0}.zaghroota-button{font-size:22px;background:#eaa0ba}.sound-button.playing{background:#ad5c7d}
+/* القلوب */
+.floating-hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:8}
+.heart{position:absolute;bottom:-28px;color:#ed78a5;opacity:.62;pointer-events:none;text-shadow:0 1px 4px #e978a544;animation:floatUp linear forwards}
+@keyframes floatUp{0%{transform:translateY(0) translateX(0);opacity:0}12%{opacity:.62}85%{opacity:.55}100%{transform:translateY(-112vh) translateX(var(--drift)) rotate(18deg);opacity:0}}
+.page-content{position:relative;z-index:1}
+.hero{min-height:75vh;display:grid;place-items:center;text-align:center;padding:75px 20px 55px;background:radial-gradient(circle at 50% 10%,#fff 0,#fff7fa 48%,#f7e4eb 100%);position:relative}
+.hero:after{content:"";position:absolute;inset:18px;border:1px solid #e9cbd6;border-radius:180px 180px 22px 22px;pointer-events:none}
+.hero-inner{max-width:720px;position:relative;z-index:1}
+.bismillah{font-family:"Amiri",serif;font-size:25px;color:var(--deep);margin:0 0 14px}
+.tiny-flower{font-size:28px;color:#d8a2b5}
+h1{font-size:clamp(32px,6vw,52px);margin:4px 0 12px}h2{font-size:clamp(28px,5vw,39px);margin:0 0 14px}
+.names{display:flex;justify-content:center;align-items:center;gap:18px;font-family:"Amiri",serif;font-size:clamp(34px,7vw,58px);color:#b95f83}
+.names i{font-size:25px;color:#d6a1b4;font-style:normal}
+.date-line{font-size:18px;color:#95677a;margin:8px 0}.intro{font-size:16px}
+.section{padding:65px 20px;text-align:center;max-width:900px;margin:auto}
+.verse-section{padding-top:48px;padding-bottom:42px}.verse{font:26px/2 "Amiri",serif;color:#98657a}.verse-ref{font-size:12px;color:#b18a99}
+.photo-frame{max-width:490px;min-height:250px;margin:25px auto;border:8px solid white;outline:1px solid #edcfda;border-radius:18px;overflow:hidden;box-shadow:0 12px 35px #89566c14;background:#fff4f7}
+.photo-frame img{display:block;width:100%;height:auto;max-height:560px;object-fit:cover}
+.photo-placeholder{display:none;min-height:270px;place-content:center;gap:8px;color:#c46b8e}.photo-placeholder span{font-size:45px}.photo-placeholder small{font-size:12px}
+.photo-caption{color:#a76c83}
+.letter-card{max-width:720px;margin:22px auto 0;padding:28px 30px;background:#fff;border:1px solid #efd3de;border-radius:22px;text-align:right;box-shadow:0 10px 30px #89566c0c}
+.letter-card p{margin:0 0 15px}.letter-card p:first-child{color:#ad5d7d;font-weight:700}.letter-card .letter-ending{color:#ad5d7d;font-weight:700;text-align:center;margin:22px 0 0}
+.countdown-section{background:#fff2f6;border:1px solid #f6dce6;border-radius:28px;margin:15px auto;padding:48px 20px}
+.countdown{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:25px 0}
+.countdown div{background:#fff;border:1px solid #f0dce4;border-radius:15px;min-width:90px;padding:12px 14px;box-shadow:0 5px 15px #89566c0c}
+.countdown strong{display:block;font-size:30px;color:#c85e87;line-height:1.5}.countdown span{font-size:12px;color:#9e7c89}.countdown-message{color:#a65f7b}
+.details-card{max-width:540px;margin:25px auto 0;padding:24px;background:#fff;border:1px solid #f0dce4;border-radius:22px;text-align:right;box-shadow:0 10px 30px #89566c0c}
+.detail-row{display:flex;align-items:center;gap:15px;padding:12px 4px;border-bottom:1px solid #f7edf1}
+.detail-icon{width:38px;height:38px;display:grid;place-items:center;background:#fff0f5;color:#d66f96;border-radius:50%;font-size:20px}
+.detail-row small,.detail-row strong{display:block}.detail-row small{font-size:12px;color:#b18a99}.detail-row strong{font-size:15px;font-weight:600}
+.map-button{display:block;text-align:center;margin-top:22px;border-radius:30px;padding:11px;background:#df79a0;color:white;text-decoration:none}.map-button.disabled{opacity:.5;pointer-events:none}
+.music-section{background:#fff7fa;border-radius:28px;margin:10px auto}.music-section>p:not(.section-kicker){color:#a66f84}
+.audio-hint,.storage-note{font-size:12px;color:#a68a95}
+.guestbook-intro{max-width:580px;margin:0 auto 24px}
+.wish-form{max-width:580px;margin:auto;text-align:right;background:white;border:1px solid #f0dce4;padding:24px;border-radius:20px}
+.wish-form label{display:block;font-size:13px;color:#94677a;margin:10px 0 5px}
+.wish-form input,.wish-form textarea{width:100%;border:1px solid #ecd5df;border-radius:12px;padding:12px;font:14px "Cairo",sans-serif;color:var(--ink);background:#fffafb;outline:none}
+.wish-form input:focus,.wish-form textarea:focus{border-color:#df79a0}.wish-form button{margin-top:16px;width:100%}
+.wishes-list{max-width:580px;margin:24px auto;display:grid;gap:12px;text-align:right}
+.wish-card{background:#fff1f6;border:1px solid #f1dce5;border-radius:15px;padding:14px 18px}.wish-card strong{color:#a65f7b}.wish-card p{margin:5px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}
+footer{padding:35px 15px;text-align:center;background:#f8e8ee;color:#96677a;font-family:"Amiri",serif;font-size:19px;position:relative;z-index:1}footer span{font:12px "Cairo",sans-serif}
+@media(max-width:520px){.hero{min-height:70vh}.hero:after{inset:10px;border-radius:130px 130px 18px 18px}.section{padding:48px 17px}.countdown{gap:8px}.countdown div{min-width:72px;padding:8px}.countdown strong{font-size:25px}.details-card{padding:17px}.verse{font-size:22px}.letter-card{padding:22px 18px}.sound-controls{left:10px;top:38%}.sound-button{width:43px;height:43px}}

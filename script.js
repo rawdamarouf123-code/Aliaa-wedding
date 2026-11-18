@@ -123,7 +123,7 @@ form.addEventListener("submit", event => {
 loadWishes();
 
 // أضيفي اسم القاعة ورابط الخريطة ووقت الفرح هنا لاحقًا
-const venueName = "قاعة بنت الأكابر";
+const venueName = "قاعة بنت السلطان";
 const mapUrl = "https://maps.app.goo.gl/yvfEVNQ8kkHPKJuz6";
 const eventTime = "7pm الساعة السابعة مساءً";
 if (venueName) document.getElementById("venueName").textContent = venueName;

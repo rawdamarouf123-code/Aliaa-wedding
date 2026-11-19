@@ -91,37 +91,82 @@ function updateCountdown() {
 }
 updateCountdown();
 setInterval(updateCountdown, 1000);
+// دفتر التهاني باستخدام Supabase
 
-// دفتر التهاني: يحفظ على نفس المتصفح والجهاز فقط في هذه النسخة
+const SUPABASE_URL = "https://knymnlhuzcjfbmrmhnht.supabase.co/rest/v1/";
+const SUPABASE_KEY = "sb_publishable_htqUyJRPxHbnzzduNpdVhg__6sJDfR8";
+
+const supabaseClient = window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
 const form = document.getElementById("wishForm");
 const wishesList = document.getElementById("wishesList");
-function loadWishes() {
-  const wishes = JSON.parse(localStorage.getItem("aliaWishes") || "[]");
-  wishesList.innerHTML = "";
-  wishes.slice().reverse().forEach(wish => {
-    const card = document.createElement("article");
-    card.className = "wish-card";
-    const name = document.createElement("strong");
-    const message = document.createElement("p");
-    name.textContent = wish.name;
-    message.textContent = wish.message;
-    card.append(name, message);
-    wishesList.appendChild(card);
-  });
+
+async function loadWishes() {
+const { data, error } = await supabaseClient
+.from("alia_wishes")
+.select("id, name, message, created_at")
+.order("created_at", { ascending: false });
+
+if (error) {
+console.error("خطأ في تحميل التهاني:", error);
+return;
 }
-form.addEventListener("submit", event => {
-  event.preventDefault();
-  const name = document.getElementById("guestName").value.trim();
-  const message = document.getElementById("wishText").value.trim();
-  if (!name || !message) return;
-  const wishes = JSON.parse(localStorage.getItem("aliaWishes") || "[]");
-  wishes.push({name, message});
-  localStorage.setItem("aliaWishes", JSON.stringify(wishes));
-  form.reset();
-  loadWishes();
+
+wishesList.innerHTML = "";
+
+data.forEach(wish => {
+const card = document.createElement("article");
+card.className = "wish-card";
+
+const name = document.createElement("strong");
+name.textContent = wish.name;
+
+const message = document.createElement("p");
+message.textContent = wish.message;
+
+card.append(name, message);
+wishesList.appendChild(card);
+
 });
+}
+
+// إضافة تهنئة جديدة
+form.addEventListener("submit", async event => {
+event.preventDefault();
+
+const name = document.getElementById("guestName").value.trim();
+const message = document.getElementById("wishText").value.trim();
+
+if (!name || !message) return;
+
+const submitButton = form.querySelector('button[type="submit"]');
+submitButton.disabled = true;
+
+const { error } = await supabaseClient
+.from("alia_wishes")
+.insert([{ name, message }]);
+
+submitButton.disabled = false;
+
+if (error) {
+console.error("خطأ في إرسال التهنئة:", error);
+alert("حصلت مشكلة في إرسال التهنئة، حاولي مرة تانية.");
+return;
+}
+
+form.reset();
+await loadWishes();
+alert("تم إرسال تهنئتك بنجاح ❤️");
+});
+
+// تحميل التهاني عند فتح الصفحة
 loadWishes();
 
+// تحديث قائمة التهاني كل 5 ثوانٍ
+setInterval(loadWishes, 5000);
 // أضيفي اسم القاعة ورابط الخريطة ووقت الفرح هنا لاحقًا
 const venueName = "قاعة بنت السلطان";
 const mapUrl = "https://maps.app.goo.gl/yvfEVNQ8kkHPKJuz6";
